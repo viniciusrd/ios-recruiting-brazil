@@ -7,8 +7,16 @@
 //
 
 import Foundation
-struct MoviesResponse {
-    var page: Int?
-    var totalResults: Int?
-    var totalPage: Int?
+struct MoviesResponse: Codable {
+    let page: Int
+    let totalResults: Int
+    let totalPage: Int
+    let movies: [Movie]
+    
+    enum CodingKeys: String, CodingKey {
+        case page = "page"
+        case totalResults = "total_results"
+        case totalPage = "total_pages"
+        case movies = "results"
+    }
 }

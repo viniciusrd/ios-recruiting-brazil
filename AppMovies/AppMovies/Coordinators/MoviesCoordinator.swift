@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import SVProgressHUD
+
 class MoviesCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var storyboardIdentifier = "Movies"
+    
+    private(set) var movieAPI: APIMovieProtocol = APIMovieDefault()
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -20,6 +24,10 @@ class MoviesCoordinator: Coordinator {
     func start() {
         if let tabViewController = UIStoryboard(name: storyboardIdentifier, bundle: nil).instantiateViewController(withIdentifier: "MovieTabBarController") as? UITabBarController{
            self.navigationController.pushViewController(tabViewController, animated: true)
+            SVProgressHUD.show()
+            movieAPI.movies(forPage: "500000", forLanguage: "en-US") { (response) in
+                SVProgressHUD.dismiss()
+            }
         }
     }
 }
