@@ -8,12 +8,12 @@
 
 import Foundation
 protocol APIMovieProtocol: AnyObject {
-    func movies(forPage page: String , forLanguage language: String, completion: @escaping APIRequest.ResponseBlock<MoviesResponse>)
+    func popularMovies(forPage page: String , forLanguage language: String, completion: @escaping APIRequest.ResponseBlock<MoviesResponse>)
 }
 
 class APIMovieDefault: APIMovieProtocol {
     
-    func movies(forPage page: String, forLanguage language: String, completion: @escaping APIRequest.ResponseBlock<MoviesResponse>) {
+    func popularMovies(forPage page: String, forLanguage language: String, completion: @escaping APIRequest.ResponseBlock<MoviesResponse>) {
         let parameters = [ "language": language,
                            "page": page
                          ]

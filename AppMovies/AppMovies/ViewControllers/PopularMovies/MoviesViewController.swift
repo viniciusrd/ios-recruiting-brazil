@@ -7,16 +7,22 @@
 //
 
 import UIKit
+import SVProgressHUD
+
+
 protocol MoviesViewControllerDelegate: class {
-    func didTapMovie()
+    func didTapMovie(movie: Movie , viewController: MoviesViewController)
 }
 class MoviesViewController: BaseViewController {
 
     @IBOutlet weak var movieCollection: UICollectionView!
     
     private let reuseIdentifier = "MovieCollectionViewCell"
+    
+    
+    var viewModel: MovieViewModel!
     var delegate: MoviesViewControllerDelegate?
-    var items = [1,2,3,4,5,1,1,1,1,1,1,1,1]
+    
     
     
     
@@ -24,16 +30,19 @@ class MoviesViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
- 
+        setupUI()
+    }
+    
+    func setupUI(){
         movieCollection.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
-//        movieCollection.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-//        movieCollection.register(MovieCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseIdentifier)
-//        movieCollection.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-//        let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-////        layout.scrollDirection  = .horizontal
-//        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-//        movieCollection.setCollectionViewLayout(layout, animated: true)
-//        movieCollection.reloadData()
+        SVProgressHUD.show()
+        viewModel.popularMovies { (movies) in
+            SVProgressHUD.dismiss()
+            DispatchQueue.main.async {
+                // Update UI
+                self.movieCollection.reloadData()
+            }
+        }
     }
     
 
@@ -54,19 +63,20 @@ extension MoviesViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
-        delegate?.didTapMovie()
+        let movie =  viewModel.movies[indexPath.row]
+        delegate?.didTapMovie(movie: movie, viewController: self)
     }
 }
 
 extension MoviesViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.items.count
+        return self.viewModel?.numberOfMovies() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MovieCollectionViewCell
-//        cell.ivCoverMovie.image = UIImage(named: "movie_cover")
-        cell.lbTitleMovie?.text = "Teste"
+        let movie = viewModel.movies[indexPath.row]
+        cell.setupMovieCell(withMovie: movie)
         return cell
     }
 }
@@ -79,6 +89,6 @@ extension MoviesViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 180, height: 250)
+        return CGSize(width: 160, height: 250)
     }
 }

@@ -30,11 +30,11 @@ struct API {
 class APIRequest {
     
     typealias ResponseBlock<T> = (_ reponse: API.Response<T>) -> Void
-    private let scheme = "https"
-    private let host = "api.themoviedb.org"
-    private let versionAPI = "/3"
+    private let scheme = Constants.scheme
+    private let host = Constants.movieHost
+    private let versionAPI = Constants.movieVersionAPI
     private var path: String
-    private var queryItem = URLQueryItem(name: "api_key", value: "564c8466dee585ae1bd14b65b40c524")
+    private var queryItem = URLQueryItem(name: "api_key", value: Constants.movieApiKey)
     private let httpMethod: API.HTTPMethod
     private var extraHeader: [String: String]?
     private var parametersBody: [String: String]?

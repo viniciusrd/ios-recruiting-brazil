@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AppMovies/View/ViewControllers/MoviesViewController.swift"
-            timestampString = "588307987.784325"
+            timestampString = "588309232.3211811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
             endingLineNumber = "67"
-            landmarkName = "collectionView(_:numberOfItemsInSection:)"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppMovies/Helper/Extensions/ImageViewLoader.swift"
+            timestampString = "588352612.541759"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "setImageFromURL(toPath:toType:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

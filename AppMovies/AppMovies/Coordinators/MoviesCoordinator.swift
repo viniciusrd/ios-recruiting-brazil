@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SVProgressHUD
 
 enum TabBarItem: String {
     case movies = "Movies"
@@ -21,8 +20,6 @@ class MoviesCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var storyboardIdentifier = "Movies"
-    
-    private(set) var movieAPI: APIMovieProtocol = APIMovieDefault()
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -48,25 +45,25 @@ class MoviesCoordinator: Coordinator {
         let moviesViewController = MoviesViewController.initFromStoryboard(named: storyboardIdentifier)
         moviesViewController.tabBarItem = UITabBarItem(title: TabBarItem.movies.rawValue, image: #imageLiteral(resourceName: "list_icon"), selectedImage:  #imageLiteral(resourceName: "list_icon"))
         moviesViewController.delegate = self
+        let movieViewModel = MovieViewModel(defaultPagination: Pagination(page: 1, totalResults: 0, totalPage: 0))
+        moviesViewController.viewModel = movieViewModel
         controllers.append(moviesViewController)
     }
     
     func showFavoritesMoviesViewController() {
         let moviesViewController = MoviesFavoritesViewController.initFromStoryboard(named: storyboardIdentifier)
-        moviesViewController.tabBarItem = UITabBarItem(title: TabBarItem.movies.rawValue, image: #imageLiteral(resourceName: "favorite_empty_icon"), selectedImage:  #imageLiteral(resourceName: "favorite_empty_icon"))
+        moviesViewController.tabBarItem = UITabBarItem(title: TabBarItem.favorites.rawValue, image: #imageLiteral(resourceName: "favorite_empty_icon"), selectedImage:  #imageLiteral(resourceName: "favorite_empty_icon"))
         controllers.append(moviesViewController)
     }
     
-    func showMovieDetailsViewController()  {
+    func showMovieDetailsViewController(forMovie movie: Movie)  {
         let movieDetailsViewController = MovieDetailsViewController.initFromStoryboard(named: storyboardIdentifier)
         self.navigationController.pushViewController(movieDetailsViewController, animated: true)
     }
 }
 
 extension MoviesCoordinator: MoviesViewControllerDelegate{
-    func didTapMovie() {
-        self.showMovieDetailsViewController()
+    func didTapMovie(movie: Movie, viewController: MoviesViewController) {
+        self.showMovieDetailsViewController(forMovie: movie)
     }
-    
-    
 }
