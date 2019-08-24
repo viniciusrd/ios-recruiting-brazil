@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviesFavoritesViewController: UIViewController {
+class MoviesFavoritesViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

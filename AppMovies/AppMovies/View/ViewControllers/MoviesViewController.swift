@@ -7,12 +7,15 @@
 //
 
 import UIKit
-
-class MoviesViewController: UIViewController {
+protocol MoviesViewControllerDelegate: class {
+    func didTapMovie()
+}
+class MoviesViewController: BaseViewController {
 
     @IBOutlet weak var movieCollection: UICollectionView!
     
     private let reuseIdentifier = "MovieCollectionViewCell"
+    var delegate: MoviesViewControllerDelegate?
     var items = [1,2,3,4,5,1,1,1,1,1,1,1,1]
     
     
@@ -51,6 +54,7 @@ extension MoviesViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
+        delegate?.didTapMovie()
     }
 }
 

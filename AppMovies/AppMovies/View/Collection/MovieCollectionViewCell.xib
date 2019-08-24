@@ -37,7 +37,7 @@
                                     <constraint firstAttribute="height" constant="18" id="B13-Io-0tI"/>
                                     <constraint firstAttribute="width" constant="18" id="CKT-hG-Pmo"/>
                                 </constraints>
-                                <state key="normal" image="favorite_empty_icon"/>
+                                <state key="normal" image="favorite_gray_icon"/>
                                 <connections>
                                     <action selector="touchFavorite:" destination="63v-8M-t9l" eventType="touchUpInside" id="zEN-5z-ftD"/>
                                 </connections>
@@ -80,7 +80,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="favorite_gray_icon" width="17" height="16"/>
         <image name="movie_cover" width="497.51998901367188" height="737.280029296875"/>
     </resources>
 </document>

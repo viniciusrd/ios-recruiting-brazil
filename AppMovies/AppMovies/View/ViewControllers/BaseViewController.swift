@@ -14,6 +14,18 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
 
     }
+    
+    static func initFromStoryboard(named storyboardName: String) -> Self {
+        return initFromStoryboardHelper(storyboardName: storyboardName)
+    }
+    
+    private class func initFromStoryboardHelper<T>(storyboardName: String) -> T {
+        
+        let storyoard = UIStoryboard(name: storyboardName, bundle: nil)
+        let className = String(describing: self)
+        let viewController = storyoard.instantiateViewController(withIdentifier: className) as! T
+        return viewController
+    }
 
 //    //Cria a toolbar padrao
 //    func createDefaultToolbar()  {
