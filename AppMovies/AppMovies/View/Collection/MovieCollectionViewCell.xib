@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MovieCollectionViewCell" reuseIdentifier="MovieCollectionViewCell" id="63v-8M-t9l" customClass="MovieCollectionViewCell" customModule="AppMovies" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="126" height="185"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="126" height="185"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9l7-Wp-C7y" customClass="CardView" customModule="AppMovies" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="126" height="185"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="movie_cover" translatesAutoresizingMaskIntoConstraints="NO" id="M4M-X1-hE9">
+                                <rect key="frame" x="0.0" y="0.0" width="126" height="168.5"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lg-m7-saG">
+                                <rect key="frame" x="0.0" y="170.5" width="126" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ITW-OE-NlM">
+                                <rect key="frame" x="102" y="6" width="18" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="B13-Io-0tI"/>
+                                    <constraint firstAttribute="width" constant="18" id="CKT-hG-Pmo"/>
+                                </constraints>
+                                <state key="normal" image="favorite_empty_icon"/>
+                                <connections>
+                                    <action selector="touchFavorite:" destination="63v-8M-t9l" eventType="touchUpInside" id="zEN-5z-ftD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="M4M-X1-hE9" secondAttribute="trailing" id="CxW-fa-Ppl"/>
+                            <constraint firstItem="2lg-m7-saG" firstAttribute="leading" secondItem="9l7-Wp-C7y" secondAttribute="leading" id="Ep4-cl-8yE"/>
+                            <constraint firstItem="2lg-m7-saG" firstAttribute="top" secondItem="M4M-X1-hE9" secondAttribute="bottom" constant="2" id="OkQ-68-PMs"/>
+                            <constraint firstItem="M4M-X1-hE9" firstAttribute="leading" secondItem="9l7-Wp-C7y" secondAttribute="leading" id="URH-9X-op8"/>
+                            <constraint firstAttribute="bottom" secondItem="2lg-m7-saG" secondAttribute="bottom" id="WOw-tN-5NP"/>
+                            <constraint firstItem="ITW-OE-NlM" firstAttribute="top" secondItem="9l7-Wp-C7y" secondAttribute="top" constant="6" id="aTU-S6-FfV"/>
+                            <constraint firstItem="M4M-X1-hE9" firstAttribute="top" secondItem="9l7-Wp-C7y" secondAttribute="top" id="fsB-wa-pHb"/>
+                            <constraint firstAttribute="trailing" secondItem="2lg-m7-saG" secondAttribute="trailing" id="ztG-vW-fQ6"/>
+                            <constraint firstAttribute="trailing" secondItem="ITW-OE-NlM" secondAttribute="trailing" constant="6" id="zvO-Mu-ZDO"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="9l7-Wp-C7y" secondAttribute="trailing" id="EB2-nX-p8R"/>
+                <constraint firstItem="9l7-Wp-C7y" firstAttribute="leading" secondItem="63v-8M-t9l" secondAttribute="leading" id="qTY-bM-bML"/>
+                <constraint firstItem="9l7-Wp-C7y" firstAttribute="top" secondItem="63v-8M-t9l" secondAttribute="top" id="rQ8-ME-0WX"/>
+                <constraint firstAttribute="bottom" secondItem="9l7-Wp-C7y" secondAttribute="bottom" id="xIx-bd-tlJ"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="v8j-cV-rS7"/>
+            <size key="customSize" width="126" height="185"/>
+            <connections>
+                <outlet property="btFavoriteMovie" destination="ITW-OE-NlM" id="Yfg-OS-Kdb"/>
+                <outlet property="ivCoverMovie" destination="M4M-X1-hE9" id="0g0-9e-Jf2"/>
+                <outlet property="lbTitleMovie" destination="2lg-m7-saG" id="8Mk-K0-vrR"/>
+            </connections>
+            <point key="canvasLocation" x="116.8" y="106.59670164917542"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="favorite_empty_icon" width="22" height="21"/>
+        <image name="movie_cover" width="497.51998901367188" height="737.280029296875"/>
+    </resources>
+</document>

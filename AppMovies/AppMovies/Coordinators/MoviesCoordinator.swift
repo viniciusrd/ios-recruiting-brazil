@@ -25,7 +25,7 @@ class MoviesCoordinator: Coordinator {
         if let tabViewController = UIStoryboard(name: storyboardIdentifier, bundle: nil).instantiateViewController(withIdentifier: "MovieTabBarController") as? UITabBarController{
            self.navigationController.pushViewController(tabViewController, animated: true)
             SVProgressHUD.show()
-            movieAPI.movies(forPage: "500000", forLanguage: "en-US") { (response) in
+            movieAPI.movies(forPage: "1", forLanguage: "en-US") { (response) in
                 SVProgressHUD.dismiss()
             }
         }
