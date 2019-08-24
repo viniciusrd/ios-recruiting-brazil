@@ -23,12 +23,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="126" height="185"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="M4M-X1-hE9">
-                                <rect key="frame" x="0.0" y="0.0" width="126" height="168.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="126" height="185"/>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="faV-A9-IcA">
                                 <rect key="frame" x="53" y="82.5" width="20" height="20"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lg-m7-saG">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lg-m7-saG">
                                 <rect key="frame" x="0.0" y="170.5" width="126" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
@@ -48,9 +48,9 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="M4M-X1-hE9" secondAttribute="bottom" id="2rX-SS-lkf"/>
                             <constraint firstAttribute="trailing" secondItem="M4M-X1-hE9" secondAttribute="trailing" id="CxW-fa-Ppl"/>
                             <constraint firstItem="2lg-m7-saG" firstAttribute="leading" secondItem="9l7-Wp-C7y" secondAttribute="leading" id="Ep4-cl-8yE"/>
-                            <constraint firstItem="2lg-m7-saG" firstAttribute="top" secondItem="M4M-X1-hE9" secondAttribute="bottom" constant="2" id="OkQ-68-PMs"/>
                             <constraint firstItem="M4M-X1-hE9" firstAttribute="leading" secondItem="9l7-Wp-C7y" secondAttribute="leading" id="URH-9X-op8"/>
                             <constraint firstAttribute="bottom" secondItem="2lg-m7-saG" secondAttribute="bottom" id="WOw-tN-5NP"/>
                             <constraint firstItem="ITW-OE-NlM" firstAttribute="top" secondItem="9l7-Wp-C7y" secondAttribute="top" constant="6" id="aTU-S6-FfV"/>

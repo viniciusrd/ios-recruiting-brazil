@@ -9,8 +9,8 @@
 import Foundation
 class MovieDetailsViewModel {
     fileprivate(set) var movieAPI: APIMovieProtocol = APIMovieDefault()
-    
     var movie: Movie
+    var movieDetails: MovieDetails?
     
     init(forMovie movie: Movie) {
         self.movie = movie
@@ -20,8 +20,12 @@ class MovieDetailsViewModel {
         movieAPI.movieDetails(forMovie: movie.id) { (response) in
             switch response{
             case .success(let response):
+                guard let movieDetails = response else { return }
+                self.movieDetails = movieDetails
                 completion(true)
             case .failure(let error):
+                guard let error = error else { return }
+                print(error.localizedDescription)
                  completion(false)
             }
         }
