@@ -8,8 +8,6 @@
 
 import UIKit
 
-protocol MovieCollectionViewCellDelegate {
-
 class MovieCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var ivCoverMovie: UIImageView!

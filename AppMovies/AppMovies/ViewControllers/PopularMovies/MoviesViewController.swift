@@ -34,7 +34,7 @@ class MoviesViewController: BaseViewController {
     }
     
     func setupUI(){
-        movieCollection.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        movieCollection.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         SVProgressHUD.show()
         viewModel.popularMovies { (movies) in
             SVProgressHUD.dismiss()
@@ -44,18 +44,6 @@ class MoviesViewController: BaseViewController {
             }
         }
     }
-    
-
-  
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

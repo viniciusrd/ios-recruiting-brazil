@@ -18,7 +18,7 @@ struct Constants {
     static let scheme = "https"
     static let movieHost = "api.themoviedb.org"
     static let movieVersionAPI = "/3"
-    static let movieApiKey = "564c8466dee585ae1bd14b65b40c524"
+    static let movieApiKey = "564c8466dee585ae1bd14b65b40c5241"
     
     static func movieImageHost(type: TypeImage) -> String{
         var path = ""

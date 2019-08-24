@@ -27,13 +27,6 @@ class MoviesCoordinator: Coordinator {
     }
     
     func start() {
-//        if let tabViewController = UIStoryboard(name: storyboardIdentifier, bundle: nil).instantiateViewController(withIdentifier: "MovieTabBarController") as? UITabBarController{
-//           self.navigationController.pushViewController(tabViewController, animated: true)
-//            SVProgressHUD.show()
-//            movieAPI.movies(forPage: "1", forLanguage: "en-US") { (response) in
-//                SVProgressHUD.dismiss()
-//            }
-//        }
         showMoviesViewController()
         showFavoritesMoviesViewController()
         tabController.viewControllers = controllers
@@ -58,6 +51,8 @@ class MoviesCoordinator: Coordinator {
     
     func showMovieDetailsViewController(forMovie movie: Movie)  {
         let movieDetailsViewController = MovieDetailsViewController.initFromStoryboard(named: storyboardIdentifier)
+        let movieDetailViewModel = MovieDetailsViewModel(forMovie: movie)
+        movieDetailsViewController.viewModel = movieDetailViewModel
         self.navigationController.pushViewController(movieDetailsViewController, animated: true)
     }
 }
