@@ -53,6 +53,7 @@ class MoviesCoordinator: Coordinator {
         let movieDetailsViewController = MovieDetailsViewController.initFromStoryboard(named: storyboardIdentifier)
         let movieDetailViewModel = MovieDetailsViewModel(forMovie: movie)
         movieDetailsViewController.viewModel = movieDetailViewModel
+        movieDetailsViewController.delegate = self
         self.navigationController.pushViewController(movieDetailsViewController, animated: true)
     }
 }
@@ -61,4 +62,13 @@ extension MoviesCoordinator: MoviesViewControllerDelegate{
     func didTapMovie(movie: Movie, viewController: MoviesViewController) {
         self.showMovieDetailsViewController(forMovie: movie)
     }
+}
+
+extension MoviesCoordinator: nameMovieDetailsViewControllerDelegate{
+    func didTapMoreAbout(forUrl url: String, viewController: UIViewController) {
+        guard let url = URL(string: url) else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    
 }

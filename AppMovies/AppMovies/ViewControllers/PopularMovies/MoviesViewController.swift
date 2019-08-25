@@ -34,6 +34,8 @@ class MoviesViewController: BaseViewController {
     }
     
     func setupUI(){
+        self.navigationItem.title = "Popular Movies"
+        
         movieCollection.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         SVProgressHUD.show()
         viewModel.popularMovies { (movies) in

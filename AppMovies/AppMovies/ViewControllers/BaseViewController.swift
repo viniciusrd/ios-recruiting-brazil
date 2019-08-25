@@ -55,7 +55,7 @@ class BaseViewController: UIViewController {
     //Seta a cor da toolbar
     func setColorNavigationBar() {
         UINavigationBar.appearance().barTintColor = UIColor(red: 255/255.0, green: 214/255.0, blue: 10/255.0, alpha: 0.0)
-        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().tintColor = .black
     }
     
 }

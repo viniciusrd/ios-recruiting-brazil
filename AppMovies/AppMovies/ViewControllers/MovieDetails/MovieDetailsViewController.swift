@@ -9,6 +9,10 @@
 import UIKit
 import SVProgressHUD
 
+protocol nameMovieDetailsViewControllerDelegate {
+    func didTapMoreAbout(forUrl url: String, viewController: UIViewController)
+}
+
 class MovieDetailsViewController: BaseViewController {
     
     @IBOutlet weak var ivCoverMovie: UIImageView!
@@ -20,6 +24,7 @@ class MovieDetailsViewController: BaseViewController {
     @IBOutlet weak var constraintTopStackInfo: NSLayoutConstraint!
     @IBOutlet weak var svInfo: UIStackView!
     @IBOutlet weak var svOverview: UIStackView!
+    @IBOutlet weak var btnMoreAbout: CustomButton!
     
     @IBOutlet weak var lbVoteCount: UILabel!
     @IBOutlet weak var cvVoteCount: CardView!
@@ -29,6 +34,7 @@ class MovieDetailsViewController: BaseViewController {
     @IBOutlet weak var lbOverwiew: UILabel!
     
     var viewModel: MovieDetailsViewModel!
+    var delegate: nameMovieDetailsViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +46,12 @@ class MovieDetailsViewController: BaseViewController {
     
     func setupUI(){
         
+        self.navigationItem.title = "Movie Details"
+        
         self.ivCoverMovie.isHidden = true
         self.svInfo.isHidden = true
         self.svOverview.isHidden = true
+        self.btnMoreAbout.isHidden = true
         self.constraintTopStackInfo.constant = 0
         
         self.lbTitle.alpha = 0.0
@@ -77,10 +86,12 @@ class MovieDetailsViewController: BaseViewController {
                             self.constraintTopStackInfo.constant = -60
                             self.svInfo.isHidden = false
                             self.svOverview.isHidden = false
+                            self.btnMoreAbout.isHidden = false
                             self.lbTitle.alpha = 1.0
                             self.lbSubtitle.alpha = 1.0
                             self.lbStatus.alpha = 1.0
                             self.lbReleased.alpha = 1.0
+                            
                             
                             self.view.layoutIfNeeded();
                         }
@@ -99,5 +110,7 @@ class MovieDetailsViewController: BaseViewController {
     }
 
     @IBAction func touchedMoreAbout(_ sender: Any) {
+        guard let homepage =  viewModel.movieDetails?.homepage else { return }
+        delegate?.didTapMoreAbout(forUrl: homepage , viewController: self)
     }
 }

@@ -360,6 +360,7 @@
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="aiLoadingCoverMovie" destination="its-N5-OwK" id="HZX-lS-5bY"/>
+                        <outlet property="btnMoreAbout" destination="zBr-3f-g0P" id="woD-DG-CS5"/>
                         <outlet property="constraintTopStackInfo" destination="bvo-Qr-EpD" id="DhD-HS-9WR"/>
                         <outlet property="cvRuntime" destination="NOO-0h-Gp7" id="FSR-Eh-rKs"/>
                         <outlet property="cvVoteCount" destination="AUC-10-bDa" id="858-Gm-8r7"/>
