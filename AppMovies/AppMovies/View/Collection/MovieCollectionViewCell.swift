@@ -28,14 +28,19 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     func setupMovieCell(withMovie movie: Movie)  {
-        ivCoverMovie.setImageFromURL(toPath: movie.posterPath, toType: .compressedImage, completion: { (complete) in
-            DispatchQueue.main.async() {
-                if complete, self.aiLoading.isAnimating{
-                    self.aiLoading.stopAnimating()
-                    self.aiLoading.isHidden = true
+        if let posterURL =  movie.posterPath {
+            ivCoverMovie.setImageFromURL(toPath: posterURL, toType: .compressedImage, completion: { (complete) in
+                DispatchQueue.main.async() {
+                    if complete, self.aiLoading.isAnimating{
+                        self.aiLoading.stopAnimating()
+                        self.aiLoading.isHidden = true
+                    }
                 }
-            }
-        })
+            })
+        }else{
+            ivCoverMovie.isHidden = true
+        }
+        
         lbTitleMovie.text = movie.originalTitle
     }
     

@@ -10,6 +10,8 @@ import Foundation
 
 protocol MovieViewModelDelegate {
     func didChangedMovies()
+    func startRequest()
+    func endRequest()
 }
 
 class MovieViewModel {
@@ -41,22 +43,22 @@ class MovieViewModel {
         }
     }
     
-    func searchMovie(searchText: String, completion: @escaping (Bool) -> Void) {
+    func searchMovie(searchText: String) {
         let query =  QueryMovie(language: "en-US", page: 1, adult: false, query: searchText)
+        self.delegate?.startRequest()
         movieAPI.searchMovie(forQuery: query) { (response) in
+            self.delegate?.endRequest()
             switch response{
             case .success(let response):
                 guard let response = response else { return }
                 self.pagination = Pagination(page: response.page, totalResults: response.totalResults, totalPage: response.totalPage)
                 self.movies = response.movies
                 self.delegate?.didChangedMovies()
-                completion(true)
             case .failure(let error):
                 guard let error = error else{
                     return
                 }
                 print(error.localizedDescription)
-                completion(false)
             }
         }
     }

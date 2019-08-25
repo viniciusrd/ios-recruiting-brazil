@@ -8,20 +8,20 @@
 
 import Foundation
 struct Movie: Codable {
-    let popularity: Double
-    let voteCount: Int
-    let video: Bool
-    let posterPath: String
-    let backdropPath: String
+    let popularity: Double?
+    let voteCount: Int?
+    let video: Bool?
+    let posterPath: String?
+    let backdropPath: String?
     let id: Int
-    let adult: Bool
-    let originalLanguage: String
-    let originalTitle: String
-    let genreIds: [Int]
-    let title: String
-    let voteAverage: Double
-    let overview: String
-    let releaseDate: String
+    let adult: Bool?
+    let originalLanguage: String?
+    let originalTitle: String?
+    let genreIds: [Int]?
+    let title: String?
+    let voteAverage: Double?
+    let overview: String?
+    let releaseDate: String?
     
     enum CodingKeys: String, CodingKey {
         case popularity = "popularity"

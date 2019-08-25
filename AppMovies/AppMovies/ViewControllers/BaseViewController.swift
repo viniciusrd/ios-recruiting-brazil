@@ -17,6 +17,10 @@ class BaseViewController: UIViewController {
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true);
+    }
+    
     static func initFromStoryboard(named storyboardName: String) -> Self {
         return initFromStoryboardHelper(storyboardName: storyboardName)
     }
@@ -30,26 +34,8 @@ class BaseViewController: UIViewController {
     }
 
 //    //Cria a toolbar padrao
-    func createDefaultToolbar()  {
+    func createDefaultToolbar(){
         self.setColorNavigationBar();
-
-//        let image = UIImage(named: "logoNav.png") //Your logo url here
-//        let imageView = UIImageView(image: image)
-//
-//        let bannerWidth = navController.navigationBar.frame.size.width
-//        let bannerHeight = navController.navigationBar.frame.size.height
-//
-//        let bannerX = bannerWidth / 2 - (image?.size.width)! / 2
-//        let bannerY = bannerHeight / 2 - (image?.size.height)! / 2
-//
-//        imageView.frame = CGRect(x: bannerX, y: bannerY, width: 102.7, height: 25)
-//        imageView.contentMode = .center
-//
-//        navigationItem.titleView = imageView
-//
-//        let searchBarButtonItem = UIBarButtonItem(image: UIImage(named: "icSearchCopy"), style: .plain, target: self, action: #selector(HomeViewController.createSearchBar))
-//        self.navigationItem.setRightBarButton(searchBarButtonItem, animated: true);
-
     }
 //
     //Seta a cor da toolbar

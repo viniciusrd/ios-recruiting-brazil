@@ -62,10 +62,8 @@ class MoviesCoordinator: Coordinator {
 }
 
 extension MoviesCoordinator: MovieTabBarViewControllerDelegate{
-    func searchBarTextDidChange(textDidChange searchText: String, viewController: UIViewController) {
-        movieViewModel.searchMovie(searchText: searchText) { (completed) in
-            print(searchText)
-        }
+    func searchBarSearchText(textDidChange searchText: String, viewController: UIViewController) {
+        movieViewModel.searchMovie(searchText: searchText)
     }
 }
 

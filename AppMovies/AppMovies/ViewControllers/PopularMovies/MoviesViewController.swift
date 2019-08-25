@@ -34,7 +34,7 @@ class MoviesViewController: BaseViewController {
     }
     
     func setupUI(){
-        self.tabBarController?.title = "Popular Movies"
+        
         self.tabBarItem = UITabBarItem(title: TabBarItem.movies.rawValue, image: #imageLiteral(resourceName: "list_icon"), selectedImage:  #imageLiteral(resourceName: "list_icon"))
         self.tabBarItem.badgeColor = .black
         
@@ -82,6 +82,13 @@ extension MoviesViewController: MovieViewModelDelegate{
         self.onChangedMovies()
     }
     
+    func startRequest() {
+        SVProgressHUD.show()
+    }
+    
+    func endRequest() {
+        SVProgressHUD.dismiss()
+    }
     
 }
 
