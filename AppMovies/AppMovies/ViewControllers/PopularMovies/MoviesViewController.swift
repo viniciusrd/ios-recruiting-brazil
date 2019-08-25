@@ -11,7 +11,7 @@ import SVProgressHUD
 
 
 protocol MoviesViewControllerDelegate: class {
-    func didTapMovie(movie: Movie , viewController: MoviesViewController)
+    func didTapShowMovieDetails(movie: Movie , viewController: MoviesViewController)
 }
 class MoviesViewController: BaseViewController {
 
@@ -29,21 +29,27 @@ class MoviesViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        viewModel.delegate = self
         setupUI()
     }
     
     func setupUI(){
-        self.navigationItem.title = "Popular Movies"
+        self.tabBarController?.title = "Popular Movies"
+        self.tabBarItem = UITabBarItem(title: TabBarItem.movies.rawValue, image: #imageLiteral(resourceName: "list_icon"), selectedImage:  #imageLiteral(resourceName: "list_icon"))
+        self.tabBarItem.badgeColor = .black
         
         movieCollection.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         SVProgressHUD.show()
         viewModel.popularMovies { (movies) in
             SVProgressHUD.dismiss()
-            DispatchQueue.main.async {
-                // Update UI
-                self.movieCollection.reloadData()
-            }
+            // Update U
+            self.onChangedMovies()
+        }
+    }
+    
+    func onChangedMovies()  {
+        DispatchQueue.main.async {
+            self.movieCollection.reloadData()
         }
     }
 
@@ -54,7 +60,7 @@ extension MoviesViewController : UICollectionViewDelegate{
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
         let movie =  viewModel.movies[indexPath.row]
-        delegate?.didTapMovie(movie: movie, viewController: self)
+        delegate?.didTapShowMovieDetails(movie: movie, viewController: self)
     }
 }
 
@@ -69,6 +75,14 @@ extension MoviesViewController: UICollectionViewDataSource{
         cell.setupMovieCell(withMovie: movie)
         return cell
     }
+}
+
+extension MoviesViewController: MovieViewModelDelegate{
+    func didChangedMovies() {
+        self.onChangedMovies()
+    }
+    
+    
 }
 
 extension MoviesViewController: UICollectionViewDelegateFlowLayout {

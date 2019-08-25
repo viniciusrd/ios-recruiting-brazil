@@ -7,11 +7,17 @@
 //
 
 import Foundation
+
+protocol MovieViewModelDelegate {
+    func didChangedMovies()
+}
+
 class MovieViewModel {
     
     fileprivate(set) var movieAPI: APIMovieProtocol = APIMovieDefault()
     fileprivate(set) var movies: [Movie] = []
     var pagination: Pagination
+    var delegate: MovieViewModelDelegate?
     
     init(defaultPagination: Pagination) {
         self.pagination = defaultPagination
@@ -35,6 +41,25 @@ class MovieViewModel {
         }
     }
     
+    func searchMovie(searchText: String, completion: @escaping (Bool) -> Void) {
+        let query =  QueryMovie(language: "en-US", page: 1, adult: false, query: searchText)
+        movieAPI.searchMovie(forQuery: query) { (response) in
+            switch response{
+            case .success(let response):
+                guard let response = response else { return }
+                self.pagination = Pagination(page: response.page, totalResults: response.totalResults, totalPage: response.totalPage)
+                self.movies = response.movies
+                self.delegate?.didChangedMovies()
+                completion(true)
+            case .failure(let error):
+                guard let error = error else{
+                    return
+                }
+                print(error.localizedDescription)
+                completion(false)
+            }
+        }
+    }
     
     func numberOfMovies() -> Int {
         return movies.count

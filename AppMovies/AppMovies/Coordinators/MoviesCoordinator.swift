@@ -15,7 +15,8 @@ enum TabBarItem: String {
 
 class MoviesCoordinator: Coordinator {
     
-    var tabController: UITabBarController
+    let movieViewModel: MovieViewModel
+    
     var controllers: [UIViewController] = []
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -23,29 +24,31 @@ class MoviesCoordinator: Coordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        tabController = UITabBarController()
+        movieViewModel = MovieViewModel(defaultPagination: Pagination(page: 1, totalResults: 0, totalPage: 0))
     }
     
     func start() {
+        showTabBarViewController()
+    }
+    
+    func showTabBarViewController() {
         showMoviesViewController()
         showFavoritesMoviesViewController()
-        tabController.viewControllers = controllers
-        tabController.tabBar.isTranslucent = false
-        self.navigationController.pushViewController(tabController, animated: true)
+        let tabViewController = MovieTabBarViewController()
+        tabViewController.movieTabBardelegate = self
+        tabViewController.viewControllers = controllers
+        self.navigationController.pushViewController(tabViewController, animated: true)
     }
     
     func showMoviesViewController()  {
         let moviesViewController = MoviesViewController.initFromStoryboard(named: storyboardIdentifier)
-        moviesViewController.tabBarItem = UITabBarItem(title: TabBarItem.movies.rawValue, image: #imageLiteral(resourceName: "list_icon"), selectedImage:  #imageLiteral(resourceName: "list_icon"))
         moviesViewController.delegate = self
-        let movieViewModel = MovieViewModel(defaultPagination: Pagination(page: 1, totalResults: 0, totalPage: 0))
         moviesViewController.viewModel = movieViewModel
         controllers.append(moviesViewController)
     }
     
     func showFavoritesMoviesViewController() {
         let moviesViewController = MoviesFavoritesViewController.initFromStoryboard(named: storyboardIdentifier)
-        moviesViewController.tabBarItem = UITabBarItem(title: TabBarItem.favorites.rawValue, image: #imageLiteral(resourceName: "favorite_empty_icon"), selectedImage:  #imageLiteral(resourceName: "favorite_empty_icon"))
         controllers.append(moviesViewController)
     }
     
@@ -58,8 +61,16 @@ class MoviesCoordinator: Coordinator {
     }
 }
 
+extension MoviesCoordinator: MovieTabBarViewControllerDelegate{
+    func searchBarTextDidChange(textDidChange searchText: String, viewController: UIViewController) {
+        movieViewModel.searchMovie(searchText: searchText) { (completed) in
+            print(searchText)
+        }
+    }
+}
+
 extension MoviesCoordinator: MoviesViewControllerDelegate{
-    func didTapMovie(movie: Movie, viewController: MoviesViewController) {
+    func didTapShowMovieDetails(movie: Movie, viewController: MoviesViewController) {
         self.showMovieDetailsViewController(forMovie: movie)
     }
 }
