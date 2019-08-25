@@ -17,6 +17,9 @@ class MovieDetailsViewController: BaseViewController {
     @IBOutlet weak var lbRuntime: UILabel!
     @IBOutlet weak var cvRuntime: CardView!
     @IBOutlet weak var lbGenre: UILabel!
+    @IBOutlet weak var constraintTopStackInfo: NSLayoutConstraint!
+    @IBOutlet weak var svInfo: UIStackView!
+    @IBOutlet weak var svOverview: UIStackView!
     
     @IBOutlet weak var lbVoteCount: UILabel!
     @IBOutlet weak var cvVoteCount: CardView!
@@ -33,13 +36,20 @@ class MovieDetailsViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setupUI()
     }
-    
-    override func setColorNavigationBar() {
-        super.setColorNavigationBar()
-    }
+
     
     func setupUI(){
-        setColorNavigationBar()
+        
+        self.ivCoverMovie.isHidden = true
+        self.svInfo.isHidden = true
+        self.svOverview.isHidden = true
+        self.constraintTopStackInfo.constant = 0
+        
+        self.lbTitle.alpha = 0.0
+        self.lbSubtitle.alpha = 0.0
+        self.lbStatus.alpha = 0.0
+        self.lbReleased.alpha = 0.0
+        
         aiLoadingCoverMovie.startAnimating()
         SVProgressHUD.show()
         viewModel.movieDetails { (_) in
@@ -59,6 +69,22 @@ class MovieDetailsViewController: BaseViewController {
                 if completed, self.aiLoadingCoverMovie.isAnimating{
                     self.aiLoadingCoverMovie.startAnimating()
                     self.aiLoadingCoverMovie.isHidden = true
+                    
+                    UIView.transition(with: self.view, duration: 2.5, options: .transitionCrossDissolve, animations: {
+                        self.ivCoverMovie.isHidden = false
+                        UIView.animate(withDuration: 2.5) {
+                            
+                            self.constraintTopStackInfo.constant = -60
+                            self.svInfo.isHidden = false
+                            self.svOverview.isHidden = false
+                            self.lbTitle.alpha = 1.0
+                            self.lbSubtitle.alpha = 1.0
+                            self.lbStatus.alpha = 1.0
+                            self.lbReleased.alpha = 1.0
+                            
+                            self.view.layoutIfNeeded();
+                        }
+                    })
                 }
             }
         }
@@ -72,4 +98,6 @@ class MovieDetailsViewController: BaseViewController {
         self.lbVoteCount.text = String(movieDetails.voteCount)
     }
 
+    @IBAction func touchedMoreAbout(_ sender: Any) {
+    }
 }

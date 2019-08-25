@@ -22,6 +22,7 @@
 		6E32915E230CD2D2008A6760 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E32915D230CD2D2008A6760 /* MovieDetailsViewController.swift */; };
 		6E329160230CD347008A6760 /* MoviesFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E32915F230CD347008A6760 /* MoviesFavoritesViewController.swift */; };
 		6E329162230CD525008A6760 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E329161230CD525008A6760 /* MoviesViewController.swift */; };
+		6E9477062311F1C900E23235 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9477052311F1C900E23235 /* CustomLabel.swift */; };
 		6EA2631D230E1898000FD798 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA2631C230E1898000FD798 /* CardView.swift */; };
 		6EA2631F230E1A59000FD798 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA2631E230E1A59000FD798 /* BaseViewController.swift */; };
 		6EA26322230E295B000FD798 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA26321230E295B000FD798 /* MovieCollectionViewCell.swift */; };
@@ -59,6 +60,7 @@
 		6E32915D230CD2D2008A6760 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		6E32915F230CD347008A6760 /* MoviesFavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesFavoritesViewController.swift; sourceTree = "<group>"; };
 		6E329161230CD525008A6760 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
+		6E9477052311F1C900E23235 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		6EA2631C230E1898000FD798 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		6EA2631E230E1A59000FD798 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		6EA26321230E295B000FD798 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				6EA2631C230E1898000FD798 /* CardView.swift */,
 				6EA72D502311A26000E5C12C /* CustomButton.swift */,
+				6E9477052311F1C900E23235 /* CustomLabel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EA72D512311A26000E5C12C /* CustomButton.swift in Sources */,
+				6E9477062311F1C900E23235 /* CustomLabel.swift in Sources */,
 				6EA72D4323118E1800E5C12C /* MovieDetailsViewModel.swift in Sources */,
 				6E329155230CC900008A6760 /* Coodinator.swift in Sources */,
 				6EA72D39231156AD00E5C12C /* Constants.swift in Sources */,

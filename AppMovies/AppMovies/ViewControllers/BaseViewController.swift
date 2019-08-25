@@ -13,6 +13,8 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        createDefaultToolbar()
+        
     }
     
     static func initFromStoryboard(named storyboardName: String) -> Self {
@@ -28,11 +30,9 @@ class BaseViewController: UIViewController {
     }
 
 //    //Cria a toolbar padrao
-//    func createDefaultToolbar()  {
-//        self.setColorNavigationBar();
-//
-//        let navController = navigationController!
-//
+    func createDefaultToolbar()  {
+        self.setColorNavigationBar();
+
 //        let image = UIImage(named: "logoNav.png") //Your logo url here
 //        let imageView = UIImageView(image: image)
 //
@@ -49,12 +49,12 @@ class BaseViewController: UIViewController {
 //
 //        let searchBarButtonItem = UIBarButtonItem(image: UIImage(named: "icSearchCopy"), style: .plain, target: self, action: #selector(HomeViewController.createSearchBar))
 //        self.navigationItem.setRightBarButton(searchBarButtonItem, animated: true);
-//
-//    }
+
+    }
 //
     //Seta a cor da toolbar
     func setColorNavigationBar() {
-        UINavigationBar.appearance().barTintColor = UIColor(red: 222/255.0, green: 71/255.0, blue: 114/255.0, alpha: 0.0)
+        UINavigationBar.appearance().barTintColor = UIColor(red: 255/255.0, green: 214/255.0, blue: 10/255.0, alpha: 0.0)
         UINavigationBar.appearance().tintColor = .white
     }
     

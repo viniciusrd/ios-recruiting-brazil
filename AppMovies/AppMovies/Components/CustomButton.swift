@@ -10,35 +10,32 @@ import UIKit
 
 class CustomButton: UIButton {
 
+    @IBInspectable var borderWidth: CGFloat {
+        set {
+            layer.borderWidth = newValue
+        }
+        get {
+            return layer.borderWidth
+        }
+    }
+    
     @IBInspectable var cornerRadius: CGFloat {
+        set {
+            layer.cornerRadius = newValue
+        }
         get {
             return layer.cornerRadius
         }
-        set {
-            layer.cornerRadius = newValue
-            layer.shadowRadius = newValue
-            layer.masksToBounds = false
-        }
     }
     
-    @IBInspectable var shadowOpacity: Float {
-        get {
-            return layer.shadowOpacity
-        }
+    @IBInspectable var borderColor: UIColor? {
         set {
-            layer.shadowOpacity = newValue
-            layer.shadowColor = UIColor.darkGray.cgColor
+            guard let uiColor = newValue else { return }
+            layer.borderColor = uiColor.cgColor
         }
-    }
-    
-    @IBInspectable var shadowOffset: CGSize {
         get {
-            return layer.shadowOffset
-        }
-        set {
-            layer.shadowOffset = newValue
-            layer.shadowColor = UIColor.black.cgColor
-            layer.masksToBounds = false
+            guard let color = layer.borderColor else { return nil }
+            return UIColor(cgColor: color)
         }
     }
 
