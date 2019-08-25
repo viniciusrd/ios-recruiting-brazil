@@ -15,6 +15,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var btFavoriteMovie: UIButton!
     @IBOutlet weak var aiLoading: UIActivityIndicatorView!
     
+    var actionBlock: (() -> Void)? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         ivCoverMovie.layer.masksToBounds = true
@@ -46,7 +48,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     @IBAction func touchFavorite(_ sender: UIButton) {
         print("ANY")
-        
+        actionBlock?()
     }
     
 }

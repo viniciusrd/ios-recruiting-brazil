@@ -1,16 +1,24 @@
 PODS:
+  - DynamicBlurView (3.0.1)
+  - PopupDialog (1.1.0):
+    - DynamicBlurView (~> 3.0.1)
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - PopupDialog (~> 1.1)
   - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - DynamicBlurView
+    - PopupDialog
     - SVProgressHUD
 
 SPEC CHECKSUMS:
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
+  PopupDialog: 42fb7a0bc4fafdf89fef8b5b2b127a6023f3e1cc
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 9270a19f53b42a92cee831b97a094ba60e015f4a
+PODFILE CHECKSUM: 010ea33a332465296613cf07d1ea34980cee55eb
 
 COCOAPODS: 1.7.5

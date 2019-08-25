@@ -11,20 +11,17 @@ import SVProgressHUD
 
 
 protocol MoviesViewControllerDelegate: class {
-    func didTapShowMovieDetails(movie: Movie , viewController: MoviesViewController)
+    func didTapShowMovieDetails(withMovie movie: Movie , viewController: MoviesViewController)
+    func didTapAddFavoriteMovie(withMovie movie: Movie, viewController: MoviesViewController)
 }
 class MoviesViewController: BaseViewController {
 
     @IBOutlet weak var movieCollection: UICollectionView!
     
     private let reuseIdentifier = "MovieCollectionViewCell"
-    
-    
+
     var viewModel: MovieViewModel!
     var delegate: MoviesViewControllerDelegate?
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +39,6 @@ class MoviesViewController: BaseViewController {
         SVProgressHUD.show()
         viewModel.popularMovies { (movies) in
             SVProgressHUD.dismiss()
-            // Update U
             self.onChangedMovies()
         }
     }
@@ -60,7 +56,7 @@ extension MoviesViewController : UICollectionViewDelegate{
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
         let movie =  viewModel.movies[indexPath.row]
-        delegate?.didTapShowMovieDetails(movie: movie, viewController: self)
+        self.delegate?.didTapShowMovieDetails(withMovie: movie, viewController: self)
     }
 }
 
@@ -73,6 +69,9 @@ extension MoviesViewController: UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath as IndexPath) as! MovieCollectionViewCell
         let movie = viewModel.movies[indexPath.row]
         cell.setupMovieCell(withMovie: movie)
+        cell.actionBlock = {
+            self.delegate?.didTapAddFavoriteMovie(withMovie: movie, viewController: self)
+        }
         return cell
     }
 }
@@ -89,7 +88,6 @@ extension MoviesViewController: MovieViewModelDelegate{
     func endRequest() {
         SVProgressHUD.dismiss()
     }
-    
 }
 
 extension MoviesViewController: UICollectionViewDelegateFlowLayout {

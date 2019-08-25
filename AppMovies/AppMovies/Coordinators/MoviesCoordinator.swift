@@ -68,7 +68,14 @@ extension MoviesCoordinator: MovieTabBarViewControllerDelegate{
 }
 
 extension MoviesCoordinator: MoviesViewControllerDelegate{
-    func didTapShowMovieDetails(movie: Movie, viewController: MoviesViewController) {
+    func didTapAddFavoriteMovie(withMovie movie: Movie, viewController: MoviesViewController) {
+        guard let titleMovie = movie.title else { return }
+        let alert = Alert(withTitle: "Favorite Movie", withMessage: "Do you want add \(titleMovie) with a favorite movie?")
+        alert.delegate = self
+        self.navigationController.present(alert.show(), animated: true, completion: nil)
+    }
+    
+    func didTapShowMovieDetails(withMovie movie: Movie, viewController: MoviesViewController) {
         self.showMovieDetailsViewController(forMovie: movie)
     }
 }
@@ -77,6 +84,22 @@ extension MoviesCoordinator: nameMovieDetailsViewControllerDelegate{
     func didTapMoreAbout(forUrl url: String, viewController: UIViewController) {
         guard let url = URL(string: url) else { return }
         UIApplication.shared.open(url)
+    }
+}
+
+extension MoviesCoordinator: AlertDelegate{
+    func didTapCancel() {
+        //Do nothing
+    }
+    
+    func didTapAccept() {
+        //show te favorites
+        let viewControllers =  self.navigationController.viewControllers
+        for viewController in viewControllers {
+            if ((viewController as? MoviesFavoritesViewController) != nil){
+                self.navigationController.present(viewController, animated: true, completion: nil)
+            }
+        }
     }
     
     
