@@ -81,6 +81,19 @@ class Alert {
         cb.titleColor     = UIColor(white: 0.6, alpha: 1)
         cb.buttonColor    = UIColor(red:0.25, green:0.25, blue:0.29, alpha:1.00)
         cb.separatorColor = UIColor(red:0.20, green:0.20, blue:0.25, alpha:1.00)
+        
+        let buttonAppearance = DefaultButton.appearance()
+        
+        // Default button
+        buttonAppearance.titleFont      = .systemFont(ofSize: 14)
+        buttonAppearance.titleColor     = .yellow
+        buttonAppearance.buttonColor    = .clear
+        
+        
+        // Below, only the differences are highlighted
+        
+        // Cancel button
+        CancelButton.appearance().titleColor = .lightGray
     }
 }
 

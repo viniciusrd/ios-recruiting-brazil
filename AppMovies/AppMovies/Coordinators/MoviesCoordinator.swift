@@ -16,15 +16,18 @@ enum TabBarItem: String {
 class MoviesCoordinator: Coordinator {
     
     let movieViewModel: MovieViewModel
+    let favoriteMovieViewModel: FavoriteMovieViewModel
     
     var controllers: [UIViewController] = []
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var storyboardIdentifier = "Movies"
+    var selectedFavoriteMovie: Movie?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         movieViewModel = MovieViewModel(defaultPagination: Pagination(page: 1, totalResults: 0, totalPage: 0))
+        favoriteMovieViewModel = FavoriteMovieViewModel()
     }
     
     func start() {
@@ -48,8 +51,9 @@ class MoviesCoordinator: Coordinator {
     }
     
     func showFavoritesMoviesViewController() {
-        let moviesViewController = MoviesFavoritesViewController.initFromStoryboard(named: storyboardIdentifier)
-        controllers.append(moviesViewController)
+        let favoriteMovieViewController = MoviesFavoritesViewController.initFromStoryboard(named: storyboardIdentifier)
+        favoriteMovieViewController.favoriteMovieViewModel = favoriteMovieViewModel
+        controllers.append(favoriteMovieViewController)
     }
     
     func showMovieDetailsViewController(forMovie movie: Movie)  {
@@ -72,6 +76,7 @@ extension MoviesCoordinator: MoviesViewControllerDelegate{
         guard let titleMovie = movie.title else { return }
         let alert = Alert(withTitle: "Favorite Movie", withMessage: "Do you want add \(titleMovie) with a favorite movie?")
         alert.delegate = self
+        self.selectedFavoriteMovie = movie
         self.navigationController.present(alert.show(), animated: true, completion: nil)
     }
     
@@ -94,12 +99,10 @@ extension MoviesCoordinator: AlertDelegate{
     
     func didTapAccept() {
         //show te favorites
-        let viewControllers =  self.navigationController.viewControllers
-        for viewController in viewControllers {
-            if ((viewController as? MoviesFavoritesViewController) != nil){
-                self.navigationController.present(viewController, animated: true, completion: nil)
-            }
-        }
+        guard let favoriteMovie = self.selectedFavoriteMovie else { return }
+        self.favoriteMovieViewModel.movie = favoriteMovie
+        self.favoriteMovieViewModel.saveFavoriteMovie(with: context)
+        self.favoriteMovieViewModel.loadFavoriteMovies(with: context)
     }
     
     

@@ -29,12 +29,6 @@ class APIMovieDefault: APIMovieProtocol {
             }
             
             if httpResponse.statusCode == 200{
-//                do {
-//                    let x = try JSONDecoder().decode(MoviesResponse.self, from: data)
-//                    print("i eat it \(String(describing: x))")
-//                } catch let error {
-//                    print(error.localizedDescription)
-//                }
                 guard let result = try? JSONDecoder().decode(MoviesResponse.self, from: data) else {
                     completion(.failure(API.standardError))
                     return
