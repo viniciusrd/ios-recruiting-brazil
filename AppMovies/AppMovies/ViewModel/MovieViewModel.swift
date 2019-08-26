@@ -32,6 +32,7 @@ class MovieViewModel {
                 guard let response = response else { return }
                 self.pagination = Pagination(page: response.page, totalResults: response.totalResults, totalPage: response.totalPage)
                 self.movies = response.movies
+                self.delegate?.didChangedMovies()
                 completion(true)
             case .failure(let error):
                 guard let error = error else{

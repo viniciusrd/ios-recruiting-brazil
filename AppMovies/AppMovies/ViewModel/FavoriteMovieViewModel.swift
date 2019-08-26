@@ -19,6 +19,7 @@ class FavoriteMovieViewModel {
     private(set) var favoriteMovie: FavoriteMovie?
     var movie: Movie?
     var favoritesMovies: [FavoriteMovie] = []
+    var favoritesMoviesFiltered = [FavoriteMovie]()
     
     var delegate: FavoriteMovieViewModelDelegate?
     
@@ -46,12 +47,21 @@ class FavoriteMovieViewModel {
         
     }
     
+    func searchMovie(searchText: String) {
+        favoritesMoviesFiltered = favoritesMovies.filter({ (favorite: FavoriteMovie) -> Bool in
+            return (favorite.titleFavoriteMovie?.lowercased().contains(searchText.lowercased()) ?? false)
+        })
+        favoritesMovies = favoritesMoviesFiltered
+        self.delegate?.didChangedFavorites()
+    }
+    
     func loadFavoriteMovies(with context: NSManagedObjectContext)  {
         favoriteMovieManager.loadFavoriteMovie(with: context) { (result) in
             switch result{
             case .success(let favorites):
                 guard let favorites = favorites else { return }
                 self.favoritesMovies = favorites
+                self.delegate?.didChangedFavorites()
             case .failure(let error):
                 print(error as Any)
             }

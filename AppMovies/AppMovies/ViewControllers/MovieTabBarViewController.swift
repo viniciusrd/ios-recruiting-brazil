@@ -9,21 +9,29 @@
 import UIKit
 
 protocol MovieTabBarViewControllerDelegate {
-    func searchBarSearchText(textDidChange searchText: String, viewController: UIViewController)
+    func searchBarSearchText(type: Type,textDidChange searchText: String, viewController: UIViewController)
+    func setDefaultMovies(type: Type)
+}
+
+enum Type {
+    case popularMovies
+    case favoriteMovies
 }
 
 class MovieTabBarViewController: UITabBarController {
-
+    
     var movieTabBardelegate: MovieTabBarViewControllerDelegate?
     var searchText = ""
+    var typeSelected: Type = .popularMovies
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUi()
     }
     
     func setupUi()  {
-        self.tabBar.isTranslucent = true
+        self.delegate = self
         self.tabBar.barTintColor = UIColor(red: 255/255.0, green: 214/255.0, blue: 10/255.0, alpha: 0.0)
         let imageSearch = UIImage(named: "search_icon")
         let searchBarButtonItem = UIBarButtonItem(image: imageSearch, style: .done, target: self, action: #selector(self.createSearchBar))
@@ -45,6 +53,19 @@ class MovieTabBarViewController: UITabBarController {
     
 }
 
+extension MovieTabBarViewController: UITabBarControllerDelegate{
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if ((viewController as? MoviesViewController) != nil){
+            typeSelected = .popularMovies
+        }else if ((viewController as? MoviesFavoritesViewController) != nil){
+            typeSelected = .favoriteMovies
+        }
+    }
+}
+
 extension MovieTabBarViewController: UISearchBarDelegate{
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -55,7 +76,7 @@ extension MovieTabBarViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if !searchText.isEmpty{
-            self.movieTabBardelegate?.searchBarSearchText(textDidChange: searchText, viewController: self)
+            self.movieTabBardelegate?.searchBarSearchText(type: self.typeSelected, textDidChange: searchText, viewController: self)
         }
     }
     
@@ -68,5 +89,6 @@ extension MovieTabBarViewController: UISearchBarDelegate{
         })
         searchBar.resignFirstResponder()
         self.searchText = ""
+        self.movieTabBardelegate?.setDefaultMovies(type: self.typeSelected)
     }
 }

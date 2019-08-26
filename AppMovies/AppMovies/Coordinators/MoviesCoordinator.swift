@@ -72,8 +72,23 @@ class MoviesCoordinator: Coordinator {
 }
 
 extension MoviesCoordinator: MovieTabBarViewControllerDelegate{
-    func searchBarSearchText(textDidChange searchText: String, viewController: UIViewController) {
-        movieViewModel.searchMovie(searchText: searchText)
+    func setDefaultMovies(type: Type) {
+        switch type{
+        case .popularMovies:
+            self.movieViewModel.popularMovies { (_) in }
+        case .favoriteMovies:
+            self.favoriteMovieViewModel.loadFavoriteMovies(with: context)
+        }
+    }
+    
+    func searchBarSearchText(type: Type, textDidChange searchText: String, viewController: UIViewController) {
+        switch type{
+        case .popularMovies:
+            self.movieViewModel.searchMovie(searchText: searchText)
+        case .favoriteMovies:
+            print("favoriteMovies")
+            self.favoriteMovieViewModel.searchMovie(searchText: searchText)
+        }
     }
 }
 

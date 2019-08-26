@@ -24,6 +24,7 @@ class MoviesFavoritesViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tabBarController?.title = "My Favorite Movies"
         favoriteMovieViewModel?.loadFavoriteMovies(with: context)
         favoriteMovieViewModel?.delegate = self
         self.tabBarItem = UITabBarItem(title: TabBarItem.favorites.rawValue, image: #imageLiteral(resourceName: "favorite_empty_icon"), selectedImage:  #imageLiteral(resourceName: "favorite_empty_icon"))
