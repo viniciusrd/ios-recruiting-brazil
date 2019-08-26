@@ -9,15 +9,15 @@
 import Foundation
 class MovieDetailsViewModel {
     fileprivate(set) var movieAPI: APIMovieProtocol = APIMovieDefault()
-    var movie: Movie
+    var movieId: Int
     var movieDetails: MovieDetails?
     
-    init(forMovie movie: Movie) {
-        self.movie = movie
+    init(forMovieId movie: Int) {
+        self.movieId = movie
     }
     
     func movieDetails(completion: @escaping (Bool) -> Void)  {
-        movieAPI.movieDetails(forMovie: movie.id) { (response) in
+        movieAPI.movieDetails(forMovie: movieId) { (response) in
             switch response{
             case .success(let response):
                 guard let movieDetails = response else { return }

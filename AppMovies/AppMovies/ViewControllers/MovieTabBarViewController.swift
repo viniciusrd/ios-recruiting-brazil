@@ -25,7 +25,6 @@ class MovieTabBarViewController: UITabBarController {
     func setupUi()  {
         self.tabBar.isTranslucent = true
         self.tabBar.barTintColor = UIColor(red: 255/255.0, green: 214/255.0, blue: 10/255.0, alpha: 0.0)
-        self.tabBarController?.title = "Popular Movies"
         let imageSearch = UIImage(named: "search_icon")
         let searchBarButtonItem = UIBarButtonItem(image: imageSearch, style: .done, target: self, action: #selector(self.createSearchBar))
         self.navigationItem.setRightBarButton(searchBarButtonItem, animated: true)

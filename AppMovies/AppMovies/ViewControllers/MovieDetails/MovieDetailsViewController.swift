@@ -9,8 +9,9 @@
 import UIKit
 import SVProgressHUD
 
-protocol nameMovieDetailsViewControllerDelegate {
+protocol MovieDetailsViewControllerDelegate {
     func didTapMoreAbout(forUrl url: String, viewController: UIViewController)
+    func errorMovieDetails()
 }
 
 class MovieDetailsViewController: BaseViewController {
@@ -34,7 +35,7 @@ class MovieDetailsViewController: BaseViewController {
     @IBOutlet weak var lbOverwiew: UILabel!
     
     var viewModel: MovieDetailsViewModel!
-    var delegate: nameMovieDetailsViewControllerDelegate?
+    var delegate: MovieDetailsViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,10 +62,15 @@ class MovieDetailsViewController: BaseViewController {
         
         aiLoadingCoverMovie.startAnimating()
         SVProgressHUD.show()
-        viewModel.movieDetails { (_) in
+        viewModel.movieDetails { (result) in
             SVProgressHUD.dismiss()
-            DispatchQueue.main.async {
-                self.buildView()
+            switch result{
+            case true:
+                DispatchQueue.main.async {
+                    self.buildView()
+                }
+            case false:
+                self.delegate?.errorMovieDetails()
             }
         }
     }

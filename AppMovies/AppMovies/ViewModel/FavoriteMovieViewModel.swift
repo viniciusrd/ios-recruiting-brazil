@@ -23,15 +23,16 @@ class FavoriteMovieViewModel {
     var delegate: FavoriteMovieViewModelDelegate?
     
     func saveFavoriteMovie(with context: NSManagedObjectContext) {
-        guard let favoriteMovie = movie else {
+        guard let favorite = movie else {
             return
         }
         
         let saveMovie = FavoriteMovie(context: context)
-        saveMovie.coverFavoriteMovie = favoriteMovie.posterPath
-        saveMovie.released = favoriteMovie.releaseDate
-        saveMovie.titleFavoriteMovie = favoriteMovie.title
-        saveMovie.subTitleFavoriteMovie = favoriteMovie.overview
+        saveMovie.iDfavoriteMovie = String(favorite.id)
+        saveMovie.coverFavoriteMovie = favorite.posterPath
+        saveMovie.released = favorite.releaseDate
+        saveMovie.titleFavoriteMovie = favorite.title
+        saveMovie.subTitleFavoriteMovie = favorite.overview
         
         favoriteMovieManager.saveFavoriteMovie(with: context) { (result) in
             switch result{

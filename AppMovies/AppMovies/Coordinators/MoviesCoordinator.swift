@@ -53,12 +53,18 @@ class MoviesCoordinator: Coordinator {
     func showFavoritesMoviesViewController() {
         let favoriteMovieViewController = MoviesFavoritesViewController.initFromStoryboard(named: storyboardIdentifier)
         favoriteMovieViewController.favoriteMovieViewModel = favoriteMovieViewModel
+        favoriteMovieViewController.delegate = self
         controllers.append(favoriteMovieViewController)
     }
     
-    func showMovieDetailsViewController(forMovie movie: Movie)  {
+    func showMovieDetailsViewController(forMovie movie: Movie? = nil, forId id: Int? = nil)  {
         let movieDetailsViewController = MovieDetailsViewController.initFromStoryboard(named: storyboardIdentifier)
-        let movieDetailViewModel = MovieDetailsViewModel(forMovie: movie)
+        let movieDetailViewModel: MovieDetailsViewModel
+        if movie == nil{
+            movieDetailViewModel = MovieDetailsViewModel(forMovieId: Int(id ?? 0))
+        }else{
+            movieDetailViewModel = MovieDetailsViewModel(forMovieId: movie?.id ?? 0)
+        }
         movieDetailsViewController.viewModel = movieDetailViewModel
         movieDetailsViewController.delegate = self
         self.navigationController.pushViewController(movieDetailsViewController, animated: true)
@@ -85,7 +91,18 @@ extension MoviesCoordinator: MoviesViewControllerDelegate{
     }
 }
 
-extension MoviesCoordinator: nameMovieDetailsViewControllerDelegate{
+extension MoviesCoordinator: MoviesFavoritesViewControllerDelegate{
+    func didTapShowMovieDetails(withMovie movie: FavoriteMovie, viewController: MoviesFavoritesViewController) {
+        self.showMovieDetailsViewController(forId: Int(movie.iDfavoriteMovie ?? "0"))
+    }
+    
+    
+}
+
+extension MoviesCoordinator: MovieDetailsViewControllerDelegate{
+    func errorMovieDetails() {
+    }
+    
     func didTapMoreAbout(forUrl url: String, viewController: UIViewController) {
         guard let url = URL(string: url) else { return }
         UIApplication.shared.open(url)

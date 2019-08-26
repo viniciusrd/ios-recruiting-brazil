@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol MoviesFavoritesViewControllerDelegate {
+    func didTapShowMovieDetails(withMovie movie: FavoriteMovie , viewController: MoviesFavoritesViewController)
+}
+
 class MoviesFavoritesViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     private let reuseIdentifier = "FavoriteMovieCell"
     var favoriteMovieViewModel: FavoriteMovieViewModel?
+    
+    var delegate: MoviesFavoritesViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +50,13 @@ extension MoviesFavoritesViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Unfavorite"
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let favorite = self.favoriteMovieViewModel?.favoritesMovies[indexPath.row] else { return }
+        self.delegate?.didTapShowMovieDetails(withMovie: favorite, viewController: self)
+        print("You selected cell #\(indexPath.row)!")
+    }
+    
 }
 
 extension MoviesFavoritesViewController: UITableViewDataSource{
@@ -67,10 +80,5 @@ extension MoviesFavoritesViewController: UITableViewDataSource{
             self.onChanged()
         }
     }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("Änyy")
-    }
-    
 }
 
