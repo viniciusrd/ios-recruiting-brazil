@@ -15,6 +15,8 @@ enum TabBarItem: String {
 
 class MoviesCoordinator: Coordinator {
     
+    // MARK: Propertie
+    
     let movieViewModel: MovieViewModel
     let favoriteMovieViewModel: FavoriteMovieViewModel
     
@@ -33,6 +35,8 @@ class MoviesCoordinator: Coordinator {
     func start() {
         showTabBarViewController()
     }
+    
+    // MARK: - LIFECYCLE
     
     func showTabBarViewController() {
         showMoviesViewController()
@@ -71,6 +75,8 @@ class MoviesCoordinator: Coordinator {
     }
 }
 
+// MARK: - MovieTabBarViewControllerDelegate
+
 extension MoviesCoordinator: MovieTabBarViewControllerDelegate{
     func setDefaultMovies(type: Type) {
         switch type{
@@ -107,6 +113,8 @@ extension MoviesCoordinator: MovieTabBarViewControllerDelegate{
     }
 }
 
+// MARK: - MoviesViewControllerDelegate
+
 extension MoviesCoordinator: MoviesViewControllerDelegate{
     func didTapAddFavoriteMovie(withMovie movie: Movie, viewController: MoviesViewController) {
         guard let titleMovie = movie.title else { return }
@@ -121,11 +129,15 @@ extension MoviesCoordinator: MoviesViewControllerDelegate{
     }
 }
 
+// MARK: - MoviesFavoritesViewControllerDelegate
+
 extension MoviesCoordinator: MoviesFavoritesViewControllerDelegate{
     func didTapShowMovieDetails(withMovie movie: FavoriteMovie, viewController: MoviesFavoritesViewController) {
         self.showMovieDetailsViewController(forId: Int(movie.iDfavoriteMovie ?? "0"))
     }
 }
+
+// MARK: - MovieDetailsViewControllerDelegate
 
 extension MoviesCoordinator: MovieDetailsViewControllerDelegate{
     func errorMovieDetails() {
@@ -136,6 +148,8 @@ extension MoviesCoordinator: MovieDetailsViewControllerDelegate{
         UIApplication.shared.open(url)
     }
 }
+
+// MARK: - AlertDelegate
 
 extension MoviesCoordinator: AlertDelegate{
     func didTapCancel() {

@@ -11,6 +11,8 @@ import Foundation
 
 class FavoriteMovieTableViewCell: UITableViewCell {
     
+    // MARK: Propertie
+    
     @IBOutlet weak var ivCoverMovie: UIImageView!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbSubTitle: UILabel!
@@ -18,12 +20,18 @@ class FavoriteMovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var aiLoading: UIActivityIndicatorView!
 
+    // MARK: - LIFECYCLE
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         ivCoverMovie.layer.masksToBounds = true
         ivCoverMovie.layer.cornerRadius = 5.0
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        ivCoverMovie.image = nil
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -40,11 +40,15 @@ class MoviesFavoritesViewController: BaseViewController {
 
 }
 
+// MARK: - FavoriteMovieViewModelDelegate
+
 extension MoviesFavoritesViewController: FavoriteMovieViewModelDelegate{
     func didChangedFavorites() {
         self.onChanged()
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension MoviesFavoritesViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
@@ -58,6 +62,8 @@ extension MoviesFavoritesViewController: UITableViewDelegate{
     }
     
 }
+
+// MARK: - UITableViewDataSource
 
 extension MoviesFavoritesViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

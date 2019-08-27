@@ -51,6 +51,8 @@ class MoviesViewController: BaseViewController {
 
 }
 
+// MARK: - UICollectionViewDelegate
+
 extension MoviesViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
@@ -59,6 +61,8 @@ extension MoviesViewController : UICollectionViewDelegate{
         self.delegate?.didTapShowMovieDetails(withMovie: movie, viewController: self)
     }
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension MoviesViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -76,6 +80,8 @@ extension MoviesViewController: UICollectionViewDataSource{
     }
 }
 
+// MARK: - MovieViewModelDelegate
+
 extension MoviesViewController: MovieViewModelDelegate{
     func didChangedMovies() {
         self.onChangedMovies()
@@ -89,6 +95,9 @@ extension MoviesViewController: MovieViewModelDelegate{
         SVProgressHUD.dismiss()
     }
 }
+
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension MoviesViewController: UICollectionViewDelegateFlowLayout {
     ///Set  size of the cell for collection
