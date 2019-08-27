@@ -41,69 +41,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AppMovies/ViewModel/MovieDetailsViewModel.swift"
-            timestampString = "588536190.068452"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "movieDetails(completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (AppMovies.API.Response&lt;AppMovies.MovieDetails&gt;) -&gt; () in AppMovies.MovieDetailsViewModel.movieDetails(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "AppMovies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/viniciusrodrigues/_Developer/Concrete%20challenger/ios-recruiting-brazil/AppMovies/AppMovies/ViewModel/MovieDetailsViewModel.swift"
-                  timestampString = "588535869.720542"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "22"
-                  endingLineNumber = "22"
-                  offsetFromSymbolStart = "264">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (AppMovies.API.Response&lt;AppMovies.MovieDetails&gt;) -&gt; () in AppMovies.MovieDetailsViewModel.movieDetails(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "AppMovies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/viniciusrodrigues/_Developer/Concrete%20challenger/ios-recruiting-brazil/AppMovies/AppMovies/ViewModel/MovieDetailsViewModel.swift"
-                  timestampString = "588535869.722712"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "22"
-                  endingLineNumber = "22"
-                  offsetFromSymbolStart = "299">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (AppMovies.API.Response&lt;AppMovies.MovieDetails&gt;) -&gt; () in AppMovies.MovieDetailsViewModel.movieDetails(completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "AppMovies"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/viniciusrodrigues/_Developer/Concrete%20challenger/ios-recruiting-brazil/AppMovies/AppMovies/ViewModel/MovieDetailsViewModel.swift"
-                  timestampString = "588535869.724666"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "22"
-                  endingLineNumber = "22"
-                  offsetFromSymbolStart = "2202">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "APIMovie.swift"
             timestampString = "588536190.068509"
             startingColumnNumber = "9223372036854775807"

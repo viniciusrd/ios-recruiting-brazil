@@ -75,7 +75,12 @@ extension MoviesCoordinator: MovieTabBarViewControllerDelegate{
     func setDefaultMovies(type: Type) {
         switch type{
         case .popularMovies:
-            self.movieViewModel.popularMovies { (_) in }
+            self.movieViewModel.popularMovies { (completed) in
+                if !completed{
+                    let alert = AlertHelper(withTitle: "Ops", withMessage: "Something didn't go well, try again.")
+                    self.navigationController.present(alert.showWarning(), animated: true, completion: nil)
+                }
+            }
         case .favoriteMovies:
             self.favoriteMovieViewModel.loadFavoriteMovies(with: context)
         }
@@ -84,10 +89,20 @@ extension MoviesCoordinator: MovieTabBarViewControllerDelegate{
     func searchBarSearchText(type: Type, textDidChange searchText: String, viewController: UIViewController) {
         switch type{
         case .popularMovies:
-            self.movieViewModel.searchMovie(searchText: searchText)
+            self.movieViewModel.searchMovie(searchText: searchText) { (completed) in
+                if !completed{
+                    let alert = AlertHelper(withTitle: "Ops", withMessage: "No movies found, try again.")
+                    self.navigationController.present(alert.showWarning(), animated: true, completion: nil)
+                }
+            }
         case .favoriteMovies:
             print("favoriteMovies")
-            self.favoriteMovieViewModel.searchMovie(searchText: searchText)
+            self.favoriteMovieViewModel.searchMovie(searchText: searchText) { (completed) in
+                if !completed{
+                    let alert = AlertHelper(withTitle: "Ops", withMessage: "No movies found, try again.")
+                    self.navigationController.present(alert.showWarning(), animated: true, completion: nil)
+                }
+            }
         }
     }
 }
@@ -95,7 +110,7 @@ extension MoviesCoordinator: MovieTabBarViewControllerDelegate{
 extension MoviesCoordinator: MoviesViewControllerDelegate{
     func didTapAddFavoriteMovie(withMovie movie: Movie, viewController: MoviesViewController) {
         guard let titleMovie = movie.title else { return }
-        let alert = Alert(withTitle: "Favorite Movie", withMessage: "Do you want add \(titleMovie) with a favorite movie?")
+        let alert = AlertHelper(withTitle: "Favorite Movie", withMessage: "Do you want add \(titleMovie) with a favorite movie?")
         alert.delegate = self
         self.selectedFavoriteMovie = movie
         self.navigationController.present(alert.show(), animated: true, completion: nil)
@@ -110,8 +125,6 @@ extension MoviesCoordinator: MoviesFavoritesViewControllerDelegate{
     func didTapShowMovieDetails(withMovie movie: FavoriteMovie, viewController: MoviesFavoritesViewController) {
         self.showMovieDetailsViewController(forId: Int(movie.iDfavoriteMovie ?? "0"))
     }
-    
-    
 }
 
 extension MoviesCoordinator: MovieDetailsViewControllerDelegate{
@@ -136,6 +149,4 @@ extension MoviesCoordinator: AlertDelegate{
         self.favoriteMovieViewModel.saveFavoriteMovie(with: context)
         self.favoriteMovieViewModel.loadFavoriteMovies(with: context)
     }
-    
-    
 }

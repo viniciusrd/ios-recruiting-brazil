@@ -44,7 +44,7 @@ class MovieViewModel {
         }
     }
     
-    func searchMovie(searchText: String) {
+    func searchMovie(searchText: String, completion: @escaping (Bool) -> Void) {
         let query =  QueryMovie(language: "en-US", page: 1, adult: false, query: searchText)
         self.delegate?.startRequest()
         movieAPI.searchMovie(forQuery: query) { (response) in
@@ -55,11 +55,13 @@ class MovieViewModel {
                 self.pagination = Pagination(page: response.page, totalResults: response.totalResults, totalPage: response.totalPage)
                 self.movies = response.movies
                 self.delegate?.didChangedMovies()
+                completion(true)
             case .failure(let error):
                 guard let error = error else{
                     return
                 }
                 print(error.localizedDescription)
+                completion(false)
             }
         }
     }

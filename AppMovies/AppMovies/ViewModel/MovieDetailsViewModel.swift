@@ -6,6 +6,7 @@
 //  Copyright © 2019 Vinicius Rodrigues. All rights reserved.
 //
 
+import UIKit
 import Foundation
 class MovieDetailsViewModel {
     fileprivate(set) var movieAPI: APIMovieProtocol = APIMovieDefault()

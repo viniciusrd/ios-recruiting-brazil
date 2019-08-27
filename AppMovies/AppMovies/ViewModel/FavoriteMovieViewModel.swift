@@ -40,19 +40,23 @@ class FavoriteMovieViewModel {
             case .success(_):
                 print("save")
                 self.delegate?.didChangedFavorites()
-            case .failure(_):
-                print("error")
+            case .failure(let error):
+                print(error as Any)
             }
         }
         
     }
     
-    func searchMovie(searchText: String) {
+    func searchMovie(searchText: String, completion: @escaping (Bool) -> Void) {
         favoritesMoviesFiltered = favoritesMovies.filter({ (favorite: FavoriteMovie) -> Bool in
             return (favorite.titleFavoriteMovie?.lowercased().contains(searchText.lowercased()) ?? false)
         })
+        if favoritesMoviesFiltered.count == 0 {
+            completion(false)
+        }
         favoritesMovies = favoritesMoviesFiltered
         self.delegate?.didChangedFavorites()
+        completion(true)
     }
     
     func loadFavoriteMovies(with context: NSManagedObjectContext)  {

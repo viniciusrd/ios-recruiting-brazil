@@ -14,7 +14,7 @@ protocol AlertDelegate {
     func didTapAccept()
 }
 
-class Alert {
+class AlertHelper {
     
     private(set) var title: String
     private(set) var message: String
@@ -27,6 +27,18 @@ class Alert {
         self.message = message
         self.popup = PopupDialog(title: title, message: message)
         self.setAppearance()
+    }
+    
+    func showWarning() -> PopupDialog {
+        let buttonCancel = CancelButton(title: "CANCEL") {
+            self.delegate?.didTapCancel()
+        }
+        
+        popup.addButtons([buttonCancel])
+        popup.transitionStyle = .fadeIn
+        popup.buttonAlignment = .horizontal
+        
+        return popup
     }
 
     func show() -> PopupDialog  {
