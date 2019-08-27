@@ -37,6 +37,7 @@ class MovieTabBarViewController: UITabBarController {
         let searchBarButtonItem = UIBarButtonItem(image: imageSearch, style: .done, target: self, action: #selector(self.createSearchBar))
         self.navigationItem.setRightBarButton(searchBarButtonItem, animated: true)
         self.navigationItem.rightBarButtonItem?.style = .plain
+        self.navigationItem.hidesSearchBarWhenScrolling = true
     }
     
     @objc func createSearchBar()  {
@@ -60,8 +61,10 @@ extension MovieTabBarViewController: UITabBarControllerDelegate{
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if ((viewController as? MoviesViewController) != nil){
             typeSelected = .popularMovies
+            self.navigationItem.title = "Popular Movies"
         }else if ((viewController as? MoviesFavoritesViewController) != nil){
             typeSelected = .favoriteMovies
+            self.navigationItem.title = "My Favorite Movies"
         }
     }
 }

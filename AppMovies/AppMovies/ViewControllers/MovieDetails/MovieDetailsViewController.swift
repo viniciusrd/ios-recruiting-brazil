@@ -89,7 +89,7 @@ class MovieDetailsViewController: BaseViewController {
                         self.ivCoverMovie.isHidden = false
                         UIView.animate(withDuration: 2.5) {
                             
-                            self.constraintTopStackInfo.constant = -60
+                            self.constraintTopStackInfo.constant = -20
                             self.svInfo.isHidden = false
                             self.svOverview.isHidden = false
                             self.btnMoreAbout.isHidden = false

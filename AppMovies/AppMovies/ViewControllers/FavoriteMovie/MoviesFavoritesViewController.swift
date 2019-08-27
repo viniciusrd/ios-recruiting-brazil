@@ -32,7 +32,6 @@ class MoviesFavoritesViewController: BaseViewController {
         tableView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
     }
     
-
     func onChanged()  {
         DispatchQueue.main.async {
             self.tableView.reloadData()
